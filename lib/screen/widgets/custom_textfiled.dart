@@ -5,8 +5,8 @@ import '../../utility/AppColor.dart';
 class CustomTextFiled extends StatelessWidget {
   String text;
   TextEditingController? textEditingController;
-
-  CustomTextFiled({required this.text, this.textEditingController});
+int  maxLines;
+  CustomTextFiled({required this.text, this.textEditingController,this.maxLines=1});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class CustomTextFiled extends StatelessWidget {
               border: Border.all(color: primaryColor),
               color: white,
               borderRadius: BorderRadius.circular(25)),
-          child: TextField(   decoration:   InputDecoration(
+          child: TextField(maxLines: maxLines,   decoration:   InputDecoration(
         border: InputBorder.none,
         focusedBorder: InputBorder.none,
         enabledBorder: InputBorder.none,

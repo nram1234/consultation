@@ -2,6 +2,7 @@ import 'package:consultation/screen/login.dart';
 import 'package:flutter/material.dart';
 
 import 'screen/signup_mostchar_1.dart';
+import 'screen/signup_mostchar_2.dart';
 import 'screen/splash.dart';
 
 void main() {
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: SignUpMostchar1()//LOGIN()// SPLASH()//const MyHomePage(title: 'Flutter Demo Home Page'),
+      home:  SignUpMostchar2()// SignUpMostchar1()//LOGIN()// SPLASH()//const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
