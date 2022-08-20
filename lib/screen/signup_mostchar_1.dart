@@ -80,37 +80,45 @@ class SignUpMostchar1 extends StatelessWidget {
                                       Text("النوع"),
                                       Container(
                                         height: 50,
-                                        width: size.width * .4,
+                                        width: size.width * .41,
                                         decoration: BoxDecoration(
                                             border:
                                                 Border.all(color: primaryColor),
                                             color: white,
                                             borderRadius:
                                                 BorderRadius.circular(25)),
-                                        child: Row(children: [
-                                          Container(
-                                            width: size.width * .2,
-                                            height: 50,
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: primaryColor),
-                                              color: white,
-                                              borderRadius:
-                                                  BorderRadius.circular(25),
-                                            ),
-                                          ),
-                                          Container(
-                                            width: size.width * .2,
-                                            height: 50,
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: primaryColor),
-                                              color: white,
-                                              borderRadius:
-                                                  BorderRadius.circular(25),
-                                            ),
-                                          ),
-                                        ]),
+                                        child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [             Container(
+                                                width: size.width * .2,
+                                                height: 50,
+                                                child:
+                                                    Center(child: Text("انثى")),
+                                                decoration: BoxDecoration(
+                                                  // border: Border.all(
+                                                  //     color: primaryColor),
+                                                  color: white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(25),
+                                                ),
+                                              ),
+                                          
+                                          
+                                              Container(
+                                                width: size.width * .2,
+                                                height: 50,
+                                                child:
+                                                    Center(child: Text("ذكر")),
+                                                decoration: BoxDecoration(
+                                                  color: primaryColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(25),
+                                                ),
+                                              ),
+                                 
+                                          
+                                            ]),
                                       )
                                     ],
                                   ),
@@ -126,19 +134,36 @@ class SignUpMostchar1 extends StatelessWidget {
                                             color: white,
                                             borderRadius:
                                                 BorderRadius.circular(25)),
-                                        child: TextField(),
+                                        child: TextField(
+                                          decoration: InputDecoration(
+                                            border: InputBorder.none,
+                                            focusedBorder: InputBorder.none,
+                                            enabledBorder: InputBorder.none,
+                                            errorBorder: InputBorder.none,
+                                            disabledBorder: InputBorder.none,
+                                            contentPadding: EdgeInsets.only(
+                                                left: 15,
+                                                bottom: 11,
+                                                top: 11,
+                                                right: 15),
+                                          ),
+                                        ),
                                       )
                                     ],
                                   ),
                                 ],
                               ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                         
                               CustomButton(
                                 width: size.width,
                                 color: primaryColor,
                                 hight: 50,
                                 onClick: () {},
                                 text: "التالي",
-                              ),
+                              ), 
                             ],
                           ),
                         )),
