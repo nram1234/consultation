@@ -1,5 +1,6 @@
 import 'package:consultation/screen/login.dart';
 import 'package:flutter/material.dart';
+import 'screen/menu_mostchar.dart';
 
 import 'screen/signup_mostchar_1.dart';
 import 'screen/signup_mostchar_2.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home:  SignUpMostchar2()// SignUpMostchar1()//LOGIN()// SPLASH()//const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MenuMostchar()// SignUpMostchar2()// SignUpMostchar1()//LOGIN()// SPLASH()//const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }

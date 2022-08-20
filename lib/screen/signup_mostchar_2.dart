@@ -213,7 +213,7 @@ class SignUpMostchar2 extends StatelessWidget {
         context: context,
         builder: (context) {
           return Container(
-            height: 150,
+            height: 200,
             color: Colors.transparent,
             child: Column(
               children: [
@@ -246,9 +246,9 @@ class SignUpMostchar2 extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        BottomSheetItem(text:"gallery" ,imagePath: "assets/images/gallery.png"),
-                        BottomSheetItem(text:"file" ,imagePath: "assets/images/file.png"),
-                        BottomSheetItem(text:"camera" ,imagePath: "assets/images/camera.png"),
+                        BottomSheetItem(text:"الصور" ,imagePath: "assets/images/gallery.png"),
+                        BottomSheetItem(text:"المستندات" ,imagePath: "assets/images/file.png"),
+                        BottomSheetItem(text:"الكاميرا" ,imagePath: "assets/images/camera.png"),
                       ],
                     )
                   ]),

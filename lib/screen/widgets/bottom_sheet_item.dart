@@ -11,11 +11,11 @@ class BottomSheetItem extends StatelessWidget {
     return Column(
       children: [
         Container(
-          height: 75,
-          width: 75,
+          height: 80,
+          width: 80,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            image: DecorationImage(image: AssetImage(imagePath)),
+            image: DecorationImage(image: AssetImage(imagePath,)),
           ),
         ),
         SizedBox(
