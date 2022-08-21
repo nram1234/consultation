@@ -1,9 +1,14 @@
 import 'package:consultation/screen/login.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'screen/PROFILE/base_profile.dart';
+import 'screen/RESCHUDULE/reschudule.dart';
 import 'screen/appointment.dart';
+import 'screen/eviews.dart';
+import 'screen/main_page/main_page.dart';
 import 'screen/menu_mostchar.dart';
 
+import 'screen/reviews2.dart';
 import 'screen/signup_mostchar_1.dart';
 import 'screen/signup_mostchar_2.dart';
 import 'screen/splash.dart';
@@ -23,18 +28,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(   textTheme:GoogleFonts.cairoTextTheme(
         Theme.of(context).textTheme,
       ),
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
+
         primarySwatch: Colors.blue,
       ),
-      home:Appointment()// MenuMostchar()// SignUpMostchar2()// SignUpMostchar1()//LOGIN()// SPLASH()//const MyHomePage(title: 'Flutter Demo Home Page'),
+      home:MainPage()//RESCHUDULE()//BaseProfile()//Reviews2()//Reviews()//Appointment()// MenuMostchar()// SignUpMostchar2()// SignUpMostchar1()//LOGIN()// SPLASH()//const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
