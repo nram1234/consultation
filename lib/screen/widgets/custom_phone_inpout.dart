@@ -5,7 +5,8 @@ import '../../utility/AppColor.dart';
 class CustomPhoneInput extends StatelessWidget {
   String text;
   TextEditingController? textEditingController;
-  CustomPhoneInput({required this.text, this.textEditingController});
+  String? Function(String?)? validat;
+  CustomPhoneInput({required this.text, this.textEditingController,this.validat});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +52,7 @@ class CustomPhoneInput extends StatelessWidget {
       }).toList(),
     ),  ),
               Expanded(
-                child: TextField(
+                child: TextFormField(controller: textEditingController,validator: validat,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     focusedBorder: InputBorder.none,

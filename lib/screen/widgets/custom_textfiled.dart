@@ -6,9 +6,10 @@ class CustomTextFiled extends StatelessWidget {
   String text;
   TextEditingController? textEditingController;
   int maxLines;
-
+ bool obscureText;
+  String? Function(String?)? validat;
   CustomTextFiled(
-      {required this.text, this.textEditingController, this.maxLines = 1});
+      {required this.text, this.textEditingController, this.maxLines = 1,this.obscureText=false,this.validat});
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +20,14 @@ class CustomTextFiled extends StatelessWidget {
           child: Text(text),
         ),
         Container(
-          padding: EdgeInsets.only(right: 8, left: 8),
+          padding: const EdgeInsets.only(right: 8, left: 8),
           decoration: BoxDecoration(
               border: Border.all(color: primaryColor),
               color: white,
               borderRadius: BorderRadius.circular(25)),
-          child: TextField(
-            maxLines: maxLines,
-            decoration: InputDecoration(
+          child: TextFormField(obscureText:obscureText ,controller: textEditingController,
+            maxLines: maxLines,validator: validat,
+            decoration:   const InputDecoration(
               border: InputBorder.none,
               focusedBorder: InputBorder.none,
               enabledBorder: InputBorder.none,

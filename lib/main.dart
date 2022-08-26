@@ -1,6 +1,8 @@
 import 'package:consultation/screen/login.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'cubit/login_cubit/login_cubit.dart';
+import 'cubit/signup_cubit/signup_cubit.dart';
 import 'screen/PROFILE/base_profile.dart';
 import 'screen/RESCHUDULE/reschudule.dart';
 import 'screen/appointment.dart';
@@ -12,6 +14,9 @@ import 'screen/reviews2.dart';
 import 'screen/signup_mostchar_1.dart';
 import 'screen/signup_mostchar_2.dart';
 import 'screen/splash.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'utility/router.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,15 +28,26 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(   textTheme:GoogleFonts.cairoTextTheme(
-        Theme.of(context).textTheme,
-      ),
-
-        primarySwatch: Colors.blue,
-      ),
-      home:MainPage()//RESCHUDULE()//BaseProfile()//Reviews2()//Reviews()//Appointment()// MenuMostchar()// SignUpMostchar2()// SignUpMostchar1()//LOGIN()// SPLASH()//const MyHomePage(title: 'Flutter Demo Home Page'),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => LoginCubit(),
+        ),   BlocProvider(
+          create: (context) => SignupCubit(),
+        ),
+         ],
+      child: MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            textTheme: GoogleFonts.cairoTextTheme(
+              Theme.of(context).textTheme,
+            ),
+            primarySwatch: Colors.blue,
+          )
+          , //RESCHUDULE()//BaseProfile()//Reviews2()//Reviews()//Appointment()// MenuMostchar()// SignUpMostchar2()// SignUpMostchar1()//LOGIN()// SPLASH()//const MyHomePage(title: 'Flutter Demo Home Page'),
+        onGenerateRoute: onGenerateRoute,
+        navigatorKey: navigatorKey,
+        initialRoute: Routes.LoginRoute,),
     );
   }
 }

@@ -1,29 +1,51 @@
+import 'package:consultation/screen/login.dart';
 import 'package:flutter/material.dart';
 
-import '../main.dart';
-import '../screen/splash.dart';
+import '../screen/signup_mostchar_1.dart';
 
-import 'page_transition.dart';
+class Routes {
+  static const String LoginRoute = "/";
+  static const String loginRoute = "/login";
 
-class MyRouter{
-  static Route<dynamic>myGenerateRoute(RouteSettings settings){
-    switch(settings.name){
-      case Routes.FirstScreen:
-        return MaterialPageRoute(builder: (context)=>const MyHomePage(title: 'm',));
-      case Routes.SecondScreen:
-        return MyPageTransition( page: SPLASH());
-      case Routes.SecondScreen:
-        return MyPageTransition( page: SPLASH());
-      default:
-        return MaterialPageRoute(builder: (context)=>const MyHomePage(title: 'f',));
+  static const String SignUpMostchar1Route = "/SignUpMostchar1";
+  static const String SignUpMostchar2Route = "/SignUpMostchar2";
+  static const String storeDetailsRoute = "/MainPage";
+}
+
+final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
+
+Route<dynamic> onGenerateRoute(RouteSettings settings) {
+  switch (settings.name) {
+    case Routes.LoginRoute:
+      return MaterialPageRoute(builder: (_) => LOGIN());
+    case Routes.SignUpMostchar1Route:
+      return MaterialPageRoute(builder: (_) => SignUpMostchar1());
+
+
+    default: {
+      return MaterialPageRoute(builder: (_) => LOGIN());
     }
   }
 }
 
+class MagicRouter {
+  static BuildContext? currentContext = navigatorKey.currentContext;
 
-class Routes{
+  static Future<dynamic> navigateTo(Widget page) =>
+      navigatorKey.currentState!.push(_materialPageRoute(page));
 
-  static const FirstScreen="/";
-  static const SecondScreen="/second";
-  static const ResScreen="/ResScreen";
+  static Future<dynamic> navigateAndPopAll(Widget page) =>
+      navigatorKey.currentState!.pushAndRemoveUntil(
+        _materialPageRoute(page),
+        (_) => false,
+      );
+
+  static Future<dynamic> navigateAndPopUntilFirstPage(Widget page) =>
+      navigatorKey.currentState!.pushAndRemoveUntil(
+          _materialPageRoute(page), (route) => route.isFirst);
+
+  static void pop() => navigatorKey.currentState!.pop();
+
+  static Route<dynamic> _materialPageRoute(Widget page) =>
+      MaterialPageRoute(builder: (_) => page);
 }

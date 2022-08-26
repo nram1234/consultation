@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
 
+import '../cubit/signup_cubit/signup_cubit.dart';
 import '../utility/AppColor.dart';
 import 'widgets/bottom_sheet_item.dart';
 import 'widgets/customBut.dart';
 import 'widgets/custom_phone_inpout.dart';
 import 'widgets/custom_textfiled.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 class SignUpMostchar2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SignupCubit cubit = SignupCubit.get(context);
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        body: Container(
+        body: BlocConsumer<SignupCubit, SignupState>(
+  listener: (context, state) {
+    // TODO: implement listener
+  },
+  builder: (context, state) {
+    return Container(
           height: size.height,
           width: size.width,
           decoration: const BoxDecoration(
@@ -48,6 +55,7 @@ class SignUpMostchar2 extends StatelessWidget {
                                 padding: const EdgeInsets.all(8.0),
                                 child: InkWell(
                                   onTap: () {
+                                    cubit.imgOf=Picof.Personal;
                                     selectFile(size: size, context: context);
                                   },
                                   child: Row(
@@ -102,77 +110,97 @@ class SignUpMostchar2 extends StatelessWidget {
                                     border: Border.all(color: primaryColor),
                                     color: white,
                                     borderRadius: BorderRadius.circular(25)),
-                                child: DropdownButton<String>(
-                                  value: null,
-                                  icon: const Icon(Icons.arrow_downward),
-                                  elevation: 16,
-                                  style:
-                                      const TextStyle(color: Colors.deepPurple),
-                                  underline: SizedBox(),
-                                  onChanged: (String? newValue) {},
-                                  items: <String>['One', 'Two', 'Free', 'Four']
-                                      .map<DropdownMenuItem<String>>(
-                                          (String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(value),
-                                    );
-                                  }).toList(),
+                                child: Center(
+                                  child: DropdownButton<int>(isExpanded: true,
+                                    value: cubit.YOfexperience,
+                                    icon: const Icon(Icons.arrow_downward),
+                                    elevation: 16,isDense: true,
+                                    style:
+                                    const TextStyle(color: Colors.deepPurple),
+                                    underline: SizedBox(),
+                                    onChanged: cubit.updateYOfexperience,
+                                    items:  cubit.experienceY
+                                        .map<DropdownMenuItem<int>>(
+                                            (int value) {
+                                          return DropdownMenuItem<int>(
+                                            value: value,
+                                            child: Text(value.toString(),textAlign: TextAlign.center),
+                                          );
+                                        }).toList(),
+                                  ),
                                 ),
                               ),
                               SizedBox(
                                 height: 10,
                               ),
-                              CustomTextFiled(
+                              CustomTextFiled(textEditingController: cubit.textEditingControllereducationn,
                                   text: "نبذه عن التعليم", maxLines: 6),
                               SizedBox(
                                 height: 10,
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Text("ارفع صور للشهادات  العلميه"),
-                                    SizedBox(
-                                      width: 4,
-                                    ),
-                                    Image.asset(
-                                      "assets/images/pic.png",
-                                      color: primaryColor,
-                                    )
-                                  ],
+                                child:  InkWell(
+                                  onTap: () {
+                                    cubit.imgOf=Picof.Scientific;
+                                    selectFile(size: size, context: context);
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Text("ارفع صور للشهادات  العلميه"),
+                                      SizedBox(
+                                        width: 4,
+                                      ),
+                                      Image.asset(
+                                        "assets/images/pic.png",
+                                        color: primaryColor,
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
                               SizedBox(
                                 height: 10,
                               ),
-                              CustomTextFiled(
+                              CustomTextFiled(textEditingController: cubit.textEditingControlleryears_of_experience,
                                   text: "نبذه عن الخبرات السابقة", maxLines: 6),
                               SizedBox(
                                 height: 10,
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Text("ارفع صور لشهادات  الخبرة"),
-                                    SizedBox(
-                                      width: 4,
-                                    ),
-                                    Image.asset(
-                                      "assets/images/pic.png",
-                                      color: primaryColor,
-                                    )
-                                  ],
+                                child:  InkWell(
+                                  onTap: () {
+                                    cubit.imgOf=Picof.experience;
+                                    selectFile(size: size, context: context);
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Text("ارفع صور لشهادات  الخبرة"),
+                                      SizedBox(
+                                        width: 4,
+                                      ),
+                                      Image.asset(
+                                        "assets/images/pic.png",
+                                        color: primaryColor,
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
                               CustomButton(
                                 width: size.width,
                                 color: primaryColor,
                                 hight: 50,
-                                onClick: () {},
+                                onClick: () {
+
+
+
+cubit.registerRequest(context);
+
+                                },
                                 text: "انهاء",
                               ),
                             ],
@@ -198,7 +226,9 @@ class SignUpMostchar2 extends StatelessWidget {
               )
             ],
           ),
-        ),
+        );
+  },
+),
       ),
     );
   }
@@ -246,9 +276,15 @@ class SignUpMostchar2 extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        BottomSheetItem(text:"الصور" ,imagePath: "assets/images/gallery.png"),
-                        BottomSheetItem(text:"المستندات" ,imagePath: "assets/images/file.png"),
-                        BottomSheetItem(text:"الكاميرا" ,imagePath: "assets/images/camera.png"),
+                        InkWell(onTap: (){
+                          BlocProvider.of<SignupCubit>(context).getImagegallery();
+                        },child: BottomSheetItem(text:"الصور" ,imagePath: "assets/images/gallery.png")),
+                        InkWell(onTap: (){
+                          BlocProvider.of<SignupCubit>(context).getImagegallery();
+                        },child: BottomSheetItem(text:"المستندات" ,imagePath: "assets/images/file.png")),
+                        InkWell(onTap: (){
+                          BlocProvider.of<SignupCubit>(context).getImagecamera();
+                        },child: BottomSheetItem(text:"الكاميرا" ,imagePath: "assets/images/camera.png")),
                       ],
                     )
                   ]),
@@ -258,4 +294,9 @@ class SignUpMostchar2 extends StatelessWidget {
           );
         });
   }
+
+
+
+
+
 }
