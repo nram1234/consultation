@@ -19,16 +19,17 @@ class SignupCubit extends Cubit<SignupState> {
   SignupCubit() : super(SignupInitial());
   final formKey = GlobalKey<FormState>();
 List<int>experienceY=[];
-int YOfexperience=0;
+int? YOfexperience;
 
 
   updateYOfexperience(  int? i){
 
-    YOfexperience=i!;
+    YOfexperience=i;
 emit(UpDateYOfexperience());
   }
 
   insertexperienceY(){
+    experienceY.clear();
 for(int i=0;i<80;i++){
   experienceY.add(i);
 }

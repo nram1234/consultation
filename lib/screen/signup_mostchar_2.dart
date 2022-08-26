@@ -114,7 +114,7 @@ class SignUpMostchar2 extends StatelessWidget {
                                   child: DropdownButton<int>(isExpanded: true,
                                     value: cubit.YOfexperience,
                                     icon: const Icon(Icons.arrow_downward),
-                                    elevation: 16,isDense: true,
+                                    elevation: 16,
                                     style:
                                     const TextStyle(color: Colors.deepPurple),
                                     underline: SizedBox(),
