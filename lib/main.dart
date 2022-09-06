@@ -2,6 +2,7 @@ import 'package:consultation/screen/login.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'cubit/login_cubit/login_cubit.dart';
+import 'cubit/main_page_cubit/main_page_cubit.dart';
 import 'cubit/signup_cubit/signup_cubit.dart';
 import 'screen/PROFILE/base_profile.dart';
 import 'screen/RESCHUDULE/reschudule.dart';
@@ -35,6 +36,14 @@ class MyApp extends StatelessWidget {
         ),   BlocProvider(
           create: (context) => SignupCubit(),
         ),
+
+
+        BlocProvider(
+          create: (context) => MainPageCubit(),
+        ),
+
+
+
          ],
       child: MaterialApp(
           title: 'Flutter Demo',

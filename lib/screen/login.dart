@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import '../cubit/login_cubit/login_cubit.dart';
 import '../utility/AppColor.dart';
 import '../utility/router.dart';
+import 'main_page/main_page.dart';
+import 'main_page/main_screen.dart';
 import 'signup_mostchar_1.dart';
 import 'widgets/customBut.dart';
 import 'widgets/login_user_container.dart';
@@ -112,8 +114,8 @@ class LOGIN extends StatelessWidget {
                               color: primaryColor,
                               hight: 50,
                               onClick: () {
-
-cubit.logInRequest( context: context);
+                                MagicRouter.navigateTo(MainPage());
+//cubit.logInRequest( context: context);
 
                               },
                               text: "دخول",
