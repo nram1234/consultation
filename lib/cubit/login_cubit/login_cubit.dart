@@ -6,7 +6,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../net/apis/login_api.dart';
 import '../../net/model/login_model.dart';
 import '../../screen/main_page/main_page.dart';
+import '../../utility/all_string_const.dart';
 import '../../utility/router.dart';
+import '../../utility/storage.dart';
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
@@ -37,7 +39,10 @@ logInRequest({ required BuildContext context}){
 
     loginModel=value as LoginModel;
 if(loginModel!.status!){
+
+  SecureStorage.writeSecureData(key: AllStringConst.Token, value: loginModel!.user!.token!);
   MagicRouter.navigateAndPopAll(MainPage());
+  
 }else{
 
 

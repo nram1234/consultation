@@ -1,6 +1,8 @@
 import 'package:consultation/screen/login.dart';
+import 'package:consultation/utility/all_string_const.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'cubit/appointment_cubit/appointment_cubit.dart';
 import 'cubit/login_cubit/login_cubit.dart';
 import 'cubit/main_page_cubit/main_page_cubit.dart';
 import 'cubit/signup_cubit/signup_cubit.dart';
@@ -18,17 +20,30 @@ import 'screen/splash.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'utility/router.dart';
+import 'utility/storage.dart';
+import 'package:get_storage/get_storage.dart';
+void main() async{
 
-void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await GetStorage.init();
+String? token=    SecureStorage.readSecureData( AllStringConst.Token);
+print("this the token=> $token");
+  runApp(  MyApp(token!=null));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+
+
+    MyApp(this.haveToken);
+
+  bool haveToken;
 
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
+    print("this ooo   $haveToken");
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -40,6 +55,9 @@ class MyApp extends StatelessWidget {
 
         BlocProvider(
           create: (context) => MainPageCubit(),
+        ),
+        BlocProvider(
+          create: (context) => AppointmentCubit(),
         ),
 
 
@@ -56,7 +74,7 @@ class MyApp extends StatelessWidget {
           , //RESCHUDULE()//BaseProfile()//Reviews2()//Reviews()//Appointment()// MenuMostchar()// SignUpMostchar2()// SignUpMostchar1()//LOGIN()// SPLASH()//const MyHomePage(title: 'Flutter Demo Home Page'),
         onGenerateRoute: onGenerateRoute,
         navigatorKey: navigatorKey,
-        initialRoute: Routes.LoginRoute,),
+        initialRoute: haveToken? Routes.MainPage  :Routes.LoginRoute,),
     );
   }
 }

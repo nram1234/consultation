@@ -32,7 +32,6 @@ class User {
   String? type;
   String? name;
   String? email;
-  String? firebaseToken;
   String? phone;
   String? gender;
   String? image;
@@ -41,9 +40,9 @@ class User {
   int? yearsOfExperience;
   String? education;
   String? experience;
-  String? educationCertificate;
-  String? experienceCertificate;
-  int? subcatgoryId;
+  List<String>? educationCertificate;
+  List<String>? experienceCertificate;
+  String? subcategory;
   String? token;
 
   User(
@@ -51,7 +50,6 @@ class User {
         this.type,
         this.name,
         this.email,
-        this.firebaseToken,
         this.phone,
         this.gender,
         this.image,
@@ -62,7 +60,7 @@ class User {
         this.experience,
         this.educationCertificate,
         this.experienceCertificate,
-        this.subcatgoryId,
+        this.subcategory,
         this.token});
 
   User.fromJson(Map<String, dynamic> json) {
@@ -70,7 +68,6 @@ class User {
     type = json['type'];
     name = json['name'];
     email = json['email'];
-    firebaseToken = json['firebase_token'];
     phone = json['phone'];
     gender = json['gender'];
     image = json['image'];
@@ -79,9 +76,9 @@ class User {
     yearsOfExperience = json['years_of_experience'];
     education = json['education'];
     experience = json['experience'];
-    educationCertificate = json['education_certificate'];
-    experienceCertificate = json['experience_certificate'];
-    subcatgoryId = json['subcatgory_id'];
+    educationCertificate = json['education_certificate'].cast<String>();
+    experienceCertificate = json['experience_certificate'].cast<String>();
+    subcategory = json['subcategory'];
     token = json['token'];
   }
 
@@ -91,7 +88,6 @@ class User {
     data['type'] = this.type;
     data['name'] = this.name;
     data['email'] = this.email;
-    data['firebase_token'] = this.firebaseToken;
     data['phone'] = this.phone;
     data['gender'] = this.gender;
     data['image'] = this.image;
@@ -102,7 +98,7 @@ class User {
     data['experience'] = this.experience;
     data['education_certificate'] = this.educationCertificate;
     data['experience_certificate'] = this.experienceCertificate;
-    data['subcatgory_id'] = this.subcatgoryId;
+    data['subcategory'] = this.subcategory;
     data['token'] = this.token;
     return data;
   }

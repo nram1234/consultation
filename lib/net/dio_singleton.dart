@@ -1,10 +1,14 @@
 import 'package:dio/dio.dart';
 
+import '../utility/all_string_const.dart';
+import '../utility/storage.dart';
+
 
 class DioSingleton {
+
   Dio dio = Dio(BaseOptions(
       headers: {
-        'apikey': "",
+
         'Content-Type': 'application/json'
       }
       ));

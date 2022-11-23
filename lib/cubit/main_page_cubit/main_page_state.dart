@@ -6,6 +6,6 @@ abstract class MainPageCubirState {}
 class MainPageCubirInitial extends MainPageCubirState {}
 class BottomNavigationBar extends MainPageCubirState {
   int index=0;
-
+int testThing =30;
   BottomNavigationBar(this.index);
 }

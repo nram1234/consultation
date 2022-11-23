@@ -23,6 +23,8 @@ class LOGIN extends StatelessWidget {
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
         // TODO: implement listener
+
+
       },
       builder: (context, state) {
 
@@ -114,8 +116,8 @@ class LOGIN extends StatelessWidget {
                               color: primaryColor,
                               hight: 50,
                               onClick: () {
-                                MagicRouter.navigateTo(MainPage());
-//cubit.logInRequest( context: context);
+                             //   MagicRouter.navigateTo(MainPage());
+ cubit.logInRequest( context: context);
 
                               },
                               text: "دخول",

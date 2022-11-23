@@ -1,201 +1,215 @@
 import 'package:flutter/material.dart';
 
+import '../cubit/appointment_cubit/appointment_cubit.dart';
 import '../utility/AppColor.dart';
 import 'widgets/appointment_list_item.dart';
 import 'widgets/custom_textfiled.dart';
 import 'widgets/tab_bar_item.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 class Appointment extends StatelessWidget {
-  List<String> list = ["القادمة","قيد الانتظار", "السابقة", "مرفوضة" ];
-  int index = 0;
-    PageController controller = PageController(initialPage: 3);
+
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
 
-    return Scaffold(
-      //appBar: AppBar(backgroundColor: primaryColor,elevation: 0,title: Text("primaryColor")),
-      body: Directionality(textDirection:TextDirection.rtl ,
-        child: Column(children: [
-          Container(
-            width: size.width,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(
-                      "assets/images/bg1.png",
-                    ),
-                    fit: BoxFit.fill)),
-            height: 150,
-            child: Column(children: [
-              SizedBox(
-                height: 40,
-              ),
-              Row(
-                children: [
-                  Icon(
-                    Icons.arrow_back_ios_new,
-                    color: white,
-                  ),
-                  Spacer(),
-                  Text("الحجوزات", style: TextStyle(color: white, fontSize: 17)),
-                  Spacer()
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 16, left: 16),
-                child: IntrinsicHeight(
-                  child: Row(
-                    children: [
-                      Image.asset(
-                        "assets/images/filter.png",
-                        height: 50,
-                        width: 50,
-                      ),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Expanded(
-                        child: Container(
-                          height: 50,
-                          padding: EdgeInsets.only(right: 8, left: 8),
-                          decoration: BoxDecoration(
-                              border: Border.all(color: primaryColor),
-                              color: white,
-                              borderRadius: BorderRadius.circular(25)),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.search_rounded),
-                              border: InputBorder.none,
-                              focusedBorder: InputBorder.none,
-                              enabledBorder: InputBorder.none,
-                              errorBorder: InputBorder.none,
-                              disabledBorder: InputBorder.none,
-                              contentPadding: EdgeInsets.only(
-                                  left: 15, bottom: 11, top: 11, right: 15),
-                            ),
-                          ),
+    Size size = MediaQuery
+        .of(context)
+        .size;
+    AppointmentCubit cubit = AppointmentCubit.get(context);
+    cubit.appointmentRequest();
+    return BlocConsumer<AppointmentCubit, AppointmentState>(
+      listener: (context, state) {
+        if(     state is AppointmentInitial){
+
+        }
+
+        print(state);
+        // TODO: implement listener
+      },
+      builder: (context, state) {
+        return     Scaffold(
+          //appBar: AppBar(backgroundColor: primaryColor,elevation: 0,title: Text("primaryColor")),
+          body: Directionality(textDirection: TextDirection.rtl,
+            child: state is UpDateAppointment? Column(children: [
+
+              Container(
+                width: size.width,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage(
+                          "assets/images/bg1.png",
                         ),
-                      )
+                        fit: BoxFit.fill)),
+                height: 150,
+                child: Column(children: [
+                  SizedBox(
+                    height: 40,
+                  ),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.arrow_back_ios_new,
+                        color: white,
+                      ),
+                      Spacer(),
+                      Text("الحجوزات", style: TextStyle(
+                          color: white, fontSize: 17)),
+                      Spacer()
                     ],
                   ),
-                ),
-              )
-            ]),
-          ),
-          Row(
-              children: List<Widget>.generate(list.length, (int index) {
-            return TabBarItem(
-              text: list[index],
-              isActive: this.index == index,
-              function: () {
-                controller.animateToPage(index,
-                    curve: Curves.bounceInOut,
-                    duration: Duration(milliseconds: 200));
-              },
-            );
-          })
-              // [
-              //   Expanded(
-              //     child: Column(
-              //       children: [
-              //         Text('11'),
-              //         Container(
-              //           width: size.width,
-              //           height: 2,
-              //           color: primaryColor,
-              //         )
-              //       ],
-              //     ),
-              //   ),
-              //   Expanded(
-              //     child: Column(
-              //       children: [
-              //         Text('11'),
-              //         Container(
-              //           width: size.width,
-              //           height: 2,
-              //           color: primaryColor,
-              //         )
-              //       ],
-              //     ),
-              //   ),
-              //   Expanded(
-              //     child: Column(
-              //       children: [
-              //         Text('11'),
-              //         Container(
-              //           width: size.width,
-              //           height: 2,
-              //           color: primaryColor,
-              //         )
-              //       ],
-              //     ),
-              //   ),
-              //   Expanded(
-              //     child: Column(
-              //       children: [
-              //         Text('11'),
-              //         Container(
-              //           width: size.width,
-              //           height: 2,
-              //           color: primaryColor,
-              //         )
-              //       ],
-              //     ),
-              //   )
-              // ]
+                  Padding(
+                    padding: const EdgeInsets.only(right: 16, left: 16),
+                    child: IntrinsicHeight(
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            "assets/images/filter.png",
+                            height: 50,
+                            width: 50,
+                          ),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Expanded(
+                            child: Container(
+                              height: 50,
+                              padding: EdgeInsets.only(right: 8, left: 8),
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: primaryColor),
+                                  color: white,
+                                  borderRadius: BorderRadius.circular(25)),
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  prefixIcon: Icon(Icons.search_rounded),
+                                  border: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+                                  enabledBorder: InputBorder.none,
+                                  errorBorder: InputBorder.none,
+                                  disabledBorder: InputBorder.none,
+                                  contentPadding: EdgeInsets.only(
+                                      left: 15, bottom: 11, top: 11, right: 15),
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  )
+                ]),
+              ),
+              Row(
+                  children: List<Widget>.generate(cubit.list.length, (int index) {
+                    return TabBarItem(
+                      text: cubit.list[index],
+                      isActive: cubit.index == index,
+                      function: () {
+                        cubit.  controller.animateToPage(index,
+                            curve: Curves.bounceInOut,
+                            duration: Duration(milliseconds: 200));
+                      },
+                    );
+                  })
+                // [
+                //   Expanded(
+                //     child: Column(
+                //       children: [
+                //         Text('11'),
+                //         Container(
+                //           width: size.width,
+                //           height: 2,
+                //           color: primaryColor,
+                //         )
+                //       ],
+                //     ),
+                //   ),
+                //   Expanded(
+                //     child: Column(
+                //       children: [
+                //         Text('11'),
+                //         Container(
+                //           width: size.width,
+                //           height: 2,
+                //           color: primaryColor,
+                //         )
+                //       ],
+                //     ),
+                //   ),
+                //   Expanded(
+                //     child: Column(
+                //       children: [
+                //         Text('11'),
+                //         Container(
+                //           width: size.width,
+                //           height: 2,
+                //           color: primaryColor,
+                //         )
+                //       ],
+                //     ),
+                //   ),
+                //   Expanded(
+                //     child: Column(
+                //       children: [
+                //         Text('11'),
+                //         Container(
+                //           width: size.width,
+                //           height: 2,
+                //           color: primaryColor,
+                //         )
+                //       ],
+                //     ),
+                //   )
+                // ]
 
               ),
-          Expanded(
-              child: PageView(
-            /// [PageView.scrollDirection] defaults to [Axis.horizontal].
-            /// Use [Axis.vertical] to scroll vertically.
-            controller: controller,
-            onPageChanged: (pos) {
-              index = pos;
-              print(index);
-            },
-            children: <Widget>[
-              Container(
-                  child: ListView.builder(
-                      itemCount: 100,
-                      itemBuilder: (context, pos) {
-                        return AppointmentListItem(
-                          pos: 0,
-                        );
-                      })),
-          Container(
-              child: ListView.builder(
-                  itemCount: 100,
-                  itemBuilder: (context, pos) {
-                    return AppointmentListItem(
-                      pos: 1,
-                    );
-                  })),
-          Container(
-              child: ListView.builder(
-                  itemCount: 100,
-                  itemBuilder: (context, pos) {
-                    return AppointmentListItem(
-                      pos: 2,
-                    );
-                  })),
-              Container(
-                  child: ListView.builder(
-                      itemCount: 100,
-                      itemBuilder: (context, pos) {
-                        return AppointmentListItem(
-                          pos: 3,
-                        );
-                      })),
-            ],
-          ))
-        ]),
-      ),
+              Expanded(
+                  child: PageView(
+
+                    /// [PageView.scrollDirection] defaults to [Axis.horizontal].
+                    /// Use [Axis.vertical] to scroll vertically.
+                    controller:cubit. controller,
+                    onPageChanged:cubit.updateindex,
+                    children: <Widget>[
+                      Container(
+                          child: ListView.builder(
+                              itemCount: cubit.comingModel?.reservaions?.length,
+                              itemBuilder: (context, pos) {
+                                return AppointmentListItem(reservaions: cubit.comingModel!.reservaions![pos],
+                                  pos: 0,
+                                );
+                              })),
+                      Container(
+                          child: ListView.builder(
+                              itemCount: cubit.waitingModel!.reservaions?.length,
+                              itemBuilder: (context, pos) {
+                                return AppointmentListItem(reservaions: cubit.waitingModel!.reservaions![pos],
+                                  pos: 1,
+                                );
+                              })),
+                      Container(
+                          child: ListView.builder(
+                              itemCount:  cubit.oldreservationModel?.reservaions?.length,
+                              itemBuilder: (context, pos) {
+                                return AppointmentListItem(reservaions: cubit.oldreservationModel!.reservaions![pos],
+                                  pos: 2,
+                                );
+                              })),
+                      Container(
+                          child: ListView.builder(
+                              itemCount:  cubit.rejectedModel?.reservaions?.length,
+                              itemBuilder: (context, pos) {
+                                return AppointmentListItem(reservaions:  cubit.rejectedModel!.reservaions![pos],
+                                  pos: 3,
+                                );
+                              })),
+                    ],
+                  ))
+            ]):Center(child: CircularProgressIndicator(),),
+          ),
+        );
+      },
     );
   }
-
 
 
   Future<void> _showMyDialog({required BuildContext context}) async {

@@ -25,7 +25,7 @@ class SecureStorage {
   }
   static  String? readSecureData(String key)   {
 
-    var readData =   box.read( key);
+    String? readData =   box.read( key);
     return readData;
   }
   static Future? deleteSecureData(String key) async{

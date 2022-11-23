@@ -20,6 +20,7 @@ class MainPage extends StatelessWidget {
           // TODO: implement listener
         },
         builder: (context, state) {
+
           return Scaffold(
             body:cubit. screens[cubit.currentIndex],
             bottomNavigationBar: Directionality(

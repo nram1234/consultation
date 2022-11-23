@@ -5,6 +5,8 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart'  as a ;
 
 
+import '../utility/all_string_const.dart';
+import '../utility/storage.dart';
 import 'abstract_json_resource.dart';
 import '../utility/dio_singleton.dart';
 import 'dio_singleton.dart';
@@ -20,11 +22,17 @@ abstract class ApiManager {
   AbstractJsonResource fromJson(data);
 
   Future<AbstractJsonResource?> getData({data}) async {
-
+    String? token=    SecureStorage.readSecureData( AllStringConst.Token);
     AbstractJsonResource? json;
+    Options options=Options(headers:   {
+
+    'Content-Type': 'application/json',
+        "authorization":"Bearer ${token}"
+    });
+
     var data;
     await dioSingleton.dio
-        .get( apiUrl()  ,queryParameters: data )
+        .get( apiUrl()  ,queryParameters: data, options: options)
         .then((value) {
           print(value.data["Status"]);
       if(value.data["Status"]==false){

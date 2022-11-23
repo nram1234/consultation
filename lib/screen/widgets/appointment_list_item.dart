@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../../net/model/reservation_model.dart';
 import '../../utility/AppColor.dart';
 import 'customBut.dart';
 
 class AppointmentListItem extends StatelessWidget {
   int pos;
-
-  AppointmentListItem({required this.pos});
+  Reservaions reservaions;
+  AppointmentListItem({required this.pos,required this.reservaions});
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +19,11 @@ class AppointmentListItem extends StatelessWidget {
             children: [
               item(
                   imagePath: "assets/images/user.png",
-                  data: "uihuhhu",
-                  titel: "اسم المستخدم"),
+                  data:reservaions.date!,
+                  titel:reservaions.consultantName!),
               item(
                   imagePath: "assets/images/calendar.png",
-                  data: "20 July 2021",
+                  data: reservaions.date!,
                   titel: "تاريخ الحجز"),
               item(
                   imagePath: "assets/images/clock.png",
@@ -30,11 +31,11 @@ class AppointmentListItem extends StatelessWidget {
                   titel: "موعد الاستشارة"),
               item(
                   imagePath: "assets/images/clock.png",
-                  data: "محادثة فيديو",
+                  data: reservaions.type!,
                   titel: "نوع الاستشارة"),
               item(
                   imagePath: "assets/images/money.png",
-                  data: "100",
+                  data: reservaions.cost.toString(),
                   titel: "سعر الاستشارة"),
             ],
           ),
