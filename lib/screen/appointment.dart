@@ -30,7 +30,7 @@ class Appointment extends StatelessWidget {
         return     Scaffold(
           //appBar: AppBar(backgroundColor: primaryColor,elevation: 0,title: Text("primaryColor")),
           body: Directionality(textDirection: TextDirection.rtl,
-            child: state is UpDateAppointment? Column(children: [
+            child:   Column(children: [
 
               Container(
                 width: size.width,
@@ -170,41 +170,56 @@ class Appointment extends StatelessWidget {
                     controller:cubit. controller,
                     onPageChanged:cubit.updateindex,
                     children: <Widget>[
-                      Container(
+                      cubit.comingModel==null?Center(child: CircularProgressIndicator(),):      Container(
                           child: ListView.builder(
                               itemCount: cubit.comingModel?.reservaions?.length,
                               itemBuilder: (context, pos) {
                                 return AppointmentListItem(reservaions: cubit.comingModel!.reservaions![pos],
-                                  pos: 0,
+                                  pos: 0,fun1: (){
+
+                                  print("object");
+
+
+                                  },fun2: (){},
                                 );
                               })),
-                      Container(
+                      cubit.waitingModel==null?Center(child: CircularProgressIndicator(),):      Container(
                           child: ListView.builder(
                               itemCount: cubit.waitingModel!.reservaions?.length,
                               itemBuilder: (context, pos) {
-                                return AppointmentListItem(reservaions: cubit.waitingModel!.reservaions![pos],
+                                return AppointmentListItem(fun1: (){
+
+                                  cubit.accept(id: cubit.waitingModel!.reservaions![pos].reservationId!.toString(),context: context);
+
+                                },fun2: (){
+
+
+                                  cubit.reject(id: cubit.waitingModel!.reservaions![pos].reservationId!.toString(),context: context);
+
+
+                                },reservaions: cubit.waitingModel!.reservaions![pos],
                                   pos: 1,
                                 );
                               })),
-                      Container(
+                      cubit.oldreservationModel==null?Center(child: CircularProgressIndicator(),):        Container(
                           child: ListView.builder(
                               itemCount:  cubit.oldreservationModel?.reservaions?.length,
                               itemBuilder: (context, pos) {
                                 return AppointmentListItem(reservaions: cubit.oldreservationModel!.reservaions![pos],
-                                  pos: 2,
+                                  pos: 2,fun1: (){},fun2: (){},
                                 );
                               })),
-                      Container(
+                      cubit.rejectedModel==null?Center(child: CircularProgressIndicator(),):         Container(
                           child: ListView.builder(
                               itemCount:  cubit.rejectedModel?.reservaions?.length,
                               itemBuilder: (context, pos) {
                                 return AppointmentListItem(reservaions:  cubit.rejectedModel!.reservaions![pos],
-                                  pos: 3,
+                                  pos: 3,fun1: (){},fun2: (){},
                                 );
                               })),
                     ],
                   ))
-            ]):Center(child: CircularProgressIndicator(),),
+            ])
           ),
         );
       },

@@ -33,6 +33,10 @@ class ReservationModel  extends AbstractJsonResource{
 }
 
 class Reservaions {
+  int? appointmentId;
+  int? reservationId;
+  int? userId;
+  int? consultantId;
   String? consultantName;
   String? date;
   String? timeFrom;
@@ -41,7 +45,11 @@ class Reservaions {
   String? type;
 
   Reservaions(
-      {this.consultantName,
+      {this.appointmentId,
+        this.reservationId,
+        this.userId,
+        this.consultantId,
+        this.consultantName,
         this.date,
         this.timeFrom,
         this.timeTo,
@@ -49,6 +57,10 @@ class Reservaions {
         this.type});
 
   Reservaions.fromJson(Map<String, dynamic> json) {
+    appointmentId = json['appointment_id'];
+    reservationId = json['reservation_id'];
+    userId = json['user_id'];
+    consultantId = json['consultant_id'];
     consultantName = json['consultant_name'];
     date = json['date'];
     timeFrom = json['time_from'];
@@ -59,6 +71,10 @@ class Reservaions {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['appointment_id'] = this.appointmentId;
+    data['reservation_id'] = this.reservationId;
+    data['user_id'] = this.userId;
+    data['consultant_id'] = this.consultantId;
     data['consultant_name'] = this.consultantName;
     data['date'] = this.date;
     data['time_from'] = this.timeFrom;
